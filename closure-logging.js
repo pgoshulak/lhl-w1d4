@@ -1,10 +1,28 @@
-var wrapLog = function (callback, name) {
+// Using spread notation
+/* var wrapLog = function (callback, name) {
   return function (...args) {
     var argString = args.join(', ')
     var result = callback(...args)
     console.log(`${name}(${argString}) => ${result}`)
   }
-};
+}; */
+
+// Using old notation
+var wrapLog = function (callback, name) {
+  return function () {
+    // Construct the string of the callback's arguments
+    var args = []
+    args.push.apply(args, arguments)
+    var argString = args.join(', ')
+    
+    // Calculate result of callback
+    var result = callback.apply(null, arguments)
+
+    // Log the result
+    console.log(`${name}(${argString}) => ${result}`)
+
+  }
+}
 
 var area = function (x, y) {
   return x * y;
