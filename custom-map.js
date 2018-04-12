@@ -1,7 +1,11 @@
 var words = ["ground", "control", "to", "major", "tom"];
 
 var map = function(array, callback) {
-  return array
+  var result = []
+  array.forEach((elem) => {
+    result.push(callback(elem))
+  })
+  return result
 }
 
 var lengths = map(words, function(word) {
